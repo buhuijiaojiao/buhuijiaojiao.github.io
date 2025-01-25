@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    
+    <link rel="icon" href="https://github.githubassets.com/favicons/favicon.svg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="# Spring Boot 注解总结 (含代码示例 - 分类版)
+
+## 核心注解
+
+### @SpringBootApplication
+
+* **作用：** Spring Boot 应用入口注解，包含配置、自动配置和组件扫描。">
+<meta property="og:title" content="SpringBoot注解总结">
+<meta property="og:description" content="# Spring Boot 注解总结 (含代码示例 - 分类版)
+
+## 核心注解
+
+### @SpringBootApplication
+
+* **作用：** Spring Boot 应用入口注解，包含配置、自动配置和组件扫描。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://buhuijiaojiao.github.io/post/SpringBoot-zhu-jie-zong-jie.html">
+<meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
+<title>SpringBoot注解总结</title>
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">SpringBoot注解总结</h1>
+<div class="title-right">
+    <a href="https://buhuijiaojiao.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/buhuijiaojiao/buhuijiaojiao.github.io/issues/3" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><h1>Spring Boot 注解总结 (含代码示例 - 分类版)</h1>
+<h2>核心注解</h2>
+<h3><a class="user-mention notranslate" data-hovercard-type="user" data-hovercard-url="/users/SpringBootApplication/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/SpringBootApplication">@SpringBootApplication</a></h3>
+<ul>
+<li>
+<p><strong>作用：</strong> Spring Boot 应用入口注解，包含配置、自动配置和组件扫描。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 主启动类。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">boot</span>.<span class="pl-s1">SpringApplication</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">boot</span>.<span class="pl-s1">autoconfigure</span>.<span class="pl-s1">SpringBootApplication</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">SpringBootApplication</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyApplication</span> {
+    <span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-smi">void</span> <span class="pl-en">main</span>(<span class="pl-smi">String</span>[] <span class="pl-s1">args</span>) {
+        <span class="pl-smi">SpringApplication</span>.<span class="pl-en">run</span>(<span class="pl-smi">MyApplication</span>.<span class="pl-k">class</span>, <span class="pl-s1">args</span>);
+    }
+}</pre></div>
+</li>
+</ul>
+<h3><a class="user-mention notranslate" data-hovercard-type="user" data-hovercard-url="/users/configuration/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/configuration">@configuration</a></h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 声明一个类为配置类，用于定义 Bean。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 定义 Bean、配置应用。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">context</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">Bean</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">context</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">Configuration</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">Configuration</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">AppConfig</span> {
+    <span class="pl-c1">@</span><span class="pl-c1">Bean</span>
+    <span class="pl-k">public</span> <span class="pl-smi">MyService</span> <span class="pl-en">myService</span>() {
+        <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-smi">MyService</span>();
+    }
+}</pre></div>
+</li>
+</ul>
+<h3><a class="user-mention notranslate" data-hovercard-type="user" data-hovercard-url="/users/bean/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/bean">@bean</a></h3>
+<ul>
+<li><strong>作用：</strong> 声明一个方法返回的对象为一个 Bean。</li>
+<li><strong>使用场景：</strong> 在配置类中创建 Bean。</li>
+<li><strong>示例代码：</strong> (见 <code class="notranslate">@Configuration</code>示例)</li>
+</ul>
+<h3><a class="user-mention notranslate" data-hovercard-type="organization" data-hovercard-url="/orgs/component/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/component">@component</a></h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 声明一个类为组件，可被自动扫描。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 通用组件，可被其他组件依赖。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">stereotype</span>.<span class="pl-s1">Component</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">Component</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyComponent</span> {
+    <span class="pl-c">// ...</span>
+}</pre></div>
+</li>
+</ul>
+<h3><a class="user-mention notranslate" data-hovercard-type="user" data-hovercard-url="/users/service/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/service">@service</a></h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 声明一个类为服务层组件。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 业务逻辑处理。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">stereotype</span>.<span class="pl-s1">Service</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">Service</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyService</span> {
+    <span class="pl-c">// ...</span>
+}</pre></div>
+</li>
+</ul>
+<h3><a class="user-mention notranslate" data-hovercard-type="user" data-hovercard-url="/users/repository/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/repository">@repository</a></h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 声明一个类为数据访问层组件。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 数据库操作。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">stereotype</span>.<span class="pl-s1">Repository</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">Repository</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyRepository</span> {
+    <span class="pl-c">// ...</span>
+}</pre></div>
+</li>
+</ul>
+<h3><a class="user-mention notranslate" data-hovercard-type="user" data-hovercard-url="/users/controller/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/controller">@controller</a></h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 声明一个类为控制器组件。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 处理用户请求，返回视图或数据。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">stereotype</span>.<span class="pl-s1">Controller</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">RequestMapping</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">ResponseBody</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">Controller</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyController</span> {
+    <span class="pl-c1">@</span><span class="pl-c1">RequestMapping</span>(<span class="pl-s">"/hello"</span>)
+    <span class="pl-c1">@</span><span class="pl-c1">ResponseBody</span>
+    <span class="pl-k">public</span> <span class="pl-smi">String</span> <span class="pl-en">hello</span>() {
+        <span class="pl-k">return</span> <span class="pl-s">"Hello World!"</span>;
+    }
+}</pre></div>
+</li>
+</ul>
+<h3><a class="user-mention notranslate" data-hovercard-type="user" data-hovercard-url="/users/RestController/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/RestController">@RestController</a></h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 声明一个类为 RESTful 控制器，返回数据。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 构建 API 接口。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">GetMapping</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">RestController</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">RestController</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyRestController</span> {
+    <span class="pl-c1">@</span><span class="pl-c1">GetMapping</span>(<span class="pl-s">"/api/data"</span>)
+    <span class="pl-k">public</span> <span class="pl-smi">String</span> <span class="pl-en">getData</span>() {
+        <span class="pl-k">return</span> <span class="pl-s">"Some Data"</span>;
+    }
+}</pre></div>
+</li>
+</ul>
+<h2>依赖注入注解</h2>
+<h3><a class="user-mention notranslate" data-hovercard-type="user" data-hovercard-url="/users/Autowired/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/Autowired">@Autowired</a></h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 根据类型自动注入 Bean。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 依赖注入。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">beans</span>.<span class="pl-s1">factory</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">Autowired</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">stereotype</span>.<span class="pl-s1">Component</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">Component</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyClient</span> {
+    <span class="pl-c1">@</span><span class="pl-c1">Autowired</span>
+    <span class="pl-k">private</span> <span class="pl-smi">MyService</span> <span class="pl-s1">myService</span>;
+}</pre></div>
+</li>
+</ul>
+<h3><a class="user-mention notranslate" data-hovercard-type="user" data-hovercard-url="/users/qualifier/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/qualifier">@qualifier</a></h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 指定注入哪个 Bean (当有多个相同类型 Bean)。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 解决 Bean 注入冲突。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">beans</span>.<span class="pl-s1">factory</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">Autowired</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">beans</span>.<span class="pl-s1">factory</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">Qualifier</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">stereotype</span>.<span class="pl-s1">Component</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">Component</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyClient</span> {
+    <span class="pl-c1">@</span><span class="pl-c1">Autowired</span>
+    <span class="pl-c1">@</span><span class="pl-c1">Qualifier</span>(<span class="pl-s">"myServiceImpl1"</span>)
+    <span class="pl-k">private</span> <span class="pl-smi">MyService</span> <span class="pl-s1">myService</span>;
+}</pre></div>
+</li>
+</ul>
+<h3><a class="user-mention notranslate" data-hovercard-type="organization" data-hovercard-url="/orgs/resource/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/resource">@resource</a></h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 根据名称注入 Bean。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 依赖注入。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">javax</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">Resource</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">stereotype</span>.<span class="pl-s1">Component</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">Component</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyClient</span> {
+    <span class="pl-c1">@</span><span class="pl-c1">Resource</span>(<span class="pl-s1">name</span> = <span class="pl-s">"myServiceImpl1"</span>)
+    <span class="pl-k">private</span> <span class="pl-smi">MyService</span> <span class="pl-s1">myService</span>;
+}</pre></div>
+</li>
+</ul>
+<h3><a class="user-mention notranslate" data-hovercard-type="organization" data-hovercard-url="/orgs/value/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/value">@value</a></h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 注入配置文件中的值。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 读取配置。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">beans</span>.<span class="pl-s1">factory</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">Value</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">stereotype</span>.<span class="pl-s1">Component</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">Component</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyConfig</span> {
+    <span class="pl-c1">@</span><span class="pl-c1">Value</span>(<span class="pl-s">"${my.property}"</span>)
+    <span class="pl-k">private</span> <span class="pl-smi">String</span> <span class="pl-s1">myProperty</span>;
+}</pre></div>
+</li>
+</ul>
+<h2>请求映射注解</h2>
+<h3><a class="user-mention notranslate" data-hovercard-type="user" data-hovercard-url="/users/RequestMapping/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/RequestMapping">@RequestMapping</a></h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 映射 HTTP 请求到处理方法。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 通用请求映射。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">RequestMapping</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">RestController</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">RestController</span>
+<span class="pl-c1">@</span><span class="pl-c1">RequestMapping</span>(<span class="pl-s">"/api"</span>)
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyController</span> {
+    <span class="pl-c1">@</span><span class="pl-c1">RequestMapping</span>(<span class="pl-s">"/data"</span>)
+    <span class="pl-k">public</span> <span class="pl-smi">String</span> <span class="pl-en">getData</span>(){
+        <span class="pl-k">return</span> <span class="pl-s">"Data"</span>;
+    }
+}</pre></div>
+</li>
+</ul>
+<h3><a class="user-mention notranslate" data-hovercard-type="user" data-hovercard-url="/users/GetMapping/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/GetMapping">@GetMapping</a></h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 映射 GET 请求。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 获取资源。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">GetMapping</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">RestController</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">RestController</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyController</span> {
+    <span class="pl-c1">@</span><span class="pl-c1">GetMapping</span>(<span class="pl-s">"/data"</span>)
+    <span class="pl-k">public</span> <span class="pl-smi">String</span> <span class="pl-en">getData</span>() {
+        <span class="pl-k">return</span> <span class="pl-s">"Data"</span>;
+    }
+}</pre></div>
+</li>
+</ul>
+<h3>@PostMapping</h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 映射 POST 请求。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 创建资源。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">PostMapping</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">RequestBody</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">RestController</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">RestController</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyController</span> {
+    <span class="pl-c1">@</span><span class="pl-c1">PostMapping</span>(<span class="pl-s">"/data"</span>)
+    <span class="pl-k">public</span> <span class="pl-smi">String</span> <span class="pl-en">createData</span>(<span class="pl-c1">@</span><span class="pl-c1">RequestBody</span> <span class="pl-smi">String</span> <span class="pl-s1">data</span>) {
+        <span class="pl-k">return</span> <span class="pl-s">"Created Data: "</span> + <span class="pl-s1">data</span>;
+    }
+}</pre></div>
+</li>
+</ul>
+<h3>@PutMapping</h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 映射 PUT 请求。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 更新资源。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">PutMapping</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">RequestBody</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">RestController</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">RestController</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyController</span> {
+    <span class="pl-c1">@</span><span class="pl-c1">PutMapping</span>(<span class="pl-s">"/data"</span>)
+    <span class="pl-k">public</span> <span class="pl-smi">String</span> <span class="pl-en">updateData</span>(<span class="pl-c1">@</span><span class="pl-c1">RequestBody</span> <span class="pl-smi">String</span> <span class="pl-s1">data</span>) {
+         <span class="pl-k">return</span> <span class="pl-s">"Updated Data: "</span> + <span class="pl-s1">data</span>;
+    }
+}</pre></div>
+</li>
+</ul>
+<h3>@DeleteMapping</h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 映射 DELETE 请求。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 删除资源。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">DeleteMapping</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">PathVariable</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">RestController</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">RestController</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyController</span> {
+    <span class="pl-c1">@</span><span class="pl-c1">DeleteMapping</span>(<span class="pl-s">"/data/{id}"</span>)
+    <span class="pl-k">public</span> <span class="pl-smi">String</span> <span class="pl-en">deleteData</span>(<span class="pl-c1">@</span><span class="pl-c1">PathVariable</span> <span class="pl-smi">Long</span> <span class="pl-s1">id</span>) {
+       <span class="pl-k">return</span> <span class="pl-s">"Deleted Data with id: "</span> + <span class="pl-s1">id</span>;
+    }
+}</pre></div>
+</li>
+</ul>
+<h3>@PatchMapping</h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 映射 PATCH 请求。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 部分更新资源。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">PatchMapping</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">RequestBody</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">RestController</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">RestController</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyController</span> {
+    <span class="pl-c1">@</span><span class="pl-c1">PatchMapping</span>(<span class="pl-s">"/data"</span>)
+    <span class="pl-k">public</span> <span class="pl-smi">String</span> <span class="pl-en">patchData</span>(<span class="pl-c1">@</span><span class="pl-c1">RequestBody</span> <span class="pl-smi">String</span> <span class="pl-s1">data</span>) {
+        <span class="pl-k">return</span> <span class="pl-s">"Patched Data: "</span> + <span class="pl-s1">data</span>;
+    }
+}</pre></div>
+</li>
+</ul>
+<h3>@PathVariable</h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 获取 URL 中的路径参数。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 获取动态参数。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">GetMapping</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">PathVariable</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">RestController</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">RestController</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyController</span> {
+    <span class="pl-c1">@</span><span class="pl-c1">GetMapping</span>(<span class="pl-s">"/data/{id}"</span>)
+    <span class="pl-k">public</span> <span class="pl-smi">String</span> <span class="pl-en">getData</span>(<span class="pl-c1">@</span><span class="pl-c1">PathVariable</span> <span class="pl-smi">Long</span> <span class="pl-s1">id</span>) {
+        <span class="pl-k">return</span> <span class="pl-s">"Data with ID: "</span> + <span class="pl-s1">id</span>;
+    }
+}</pre></div>
+</li>
+</ul>
+<h3><a class="user-mention notranslate" data-hovercard-type="user" data-hovercard-url="/users/RequestParam/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/RequestParam">@RequestParam</a></h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 获取请求参数。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 获取查询参数。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">GetMapping</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">RequestParam</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">RestController</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">RestController</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyController</span> {
+    <span class="pl-c1">@</span><span class="pl-c1">GetMapping</span>(<span class="pl-s">"/data"</span>)
+    <span class="pl-k">public</span> <span class="pl-smi">String</span> <span class="pl-en">getData</span>(<span class="pl-c1">@</span><span class="pl-c1">RequestParam</span> <span class="pl-smi">String</span> <span class="pl-s1">name</span>) {
+        <span class="pl-k">return</span> <span class="pl-s">"Data for name: "</span> + <span class="pl-s1">name</span>;
+    }
+}</pre></div>
+</li>
+</ul>
+<h3>@RequestBody</h3>
+<ul>
+<li><strong>作用：</strong> 获取请求体中的数据。</li>
+<li><strong>使用场景：</strong> 获取 POST、PUT 请求的数据。</li>
+<li><strong>示例代码：</strong> (见 <code class="notranslate">@PostMapping</code> 示例)</li>
+</ul>
+<h2>AOP 注解</h2>
+<h3><a class="user-mention notranslate" data-hovercard-type="user" data-hovercard-url="/users/aspect/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/aspect">@aspect</a></h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 声明一个类为切面。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 定义 AOP 横切逻辑。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">aspectj</span>.<span class="pl-s1">lang</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">Aspect</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">stereotype</span>.<span class="pl-s1">Component</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">Aspect</span>
+<span class="pl-c1">@</span><span class="pl-c1">Component</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyAspect</span> {
+    <span class="pl-c">// ... advice methods</span>
+}</pre></div>
+</li>
+</ul>
+<h3><a class="user-mention notranslate" data-hovercard-type="organization" data-hovercard-url="/orgs/before/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/before">@before</a></h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 方法执行前执行。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 前置通知。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">aspectj</span>.<span class="pl-s1">lang</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">Aspect</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">aspectj</span>.<span class="pl-s1">lang</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">Before</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">stereotype</span>.<span class="pl-s1">Component</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">Aspect</span>
+<span class="pl-c1">@</span><span class="pl-c1">Component</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyAspect</span> {
+
+    <span class="pl-c1">@</span><span class="pl-c1">Before</span>(<span class="pl-s">"execution(* com.example.demo.service.*.*(..))"</span>)
+    <span class="pl-k">public</span> <span class="pl-smi">void</span> <span class="pl-en">beforeAdvice</span>(){
+       <span class="pl-smi">System</span>.<span class="pl-s1">out</span>.<span class="pl-en">println</span>(<span class="pl-s">"Before Method"</span>);
+    }
+}</pre></div>
+</li>
+</ul>
+<h3><a class="user-mention notranslate" data-hovercard-type="user" data-hovercard-url="/users/after/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/after">@after</a></h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 方法执行后执行。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 后置通知。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">aspectj</span>.<span class="pl-s1">lang</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">After</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">aspectj</span>.<span class="pl-s1">lang</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">Aspect</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">stereotype</span>.<span class="pl-s1">Component</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">Aspect</span>
+<span class="pl-c1">@</span><span class="pl-c1">Component</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyAspect</span> {
+
+     <span class="pl-c1">@</span><span class="pl-c1">After</span>(<span class="pl-s">"execution(* com.example.demo.service.*.*(..))"</span>)
+     <span class="pl-k">public</span> <span class="pl-smi">void</span> <span class="pl-en">afterAdvice</span>(){
+        <span class="pl-smi">System</span>.<span class="pl-s1">out</span>.<span class="pl-en">println</span>(<span class="pl-s">"After Method"</span>);
+     }
+ }</pre></div>
+</li>
+</ul>
+<h3>@AfterReturning</h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 方法成功返回后执行。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 返回通知。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">aspectj</span>.<span class="pl-s1">lang</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">AfterReturning</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">aspectj</span>.<span class="pl-s1">lang</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">Aspect</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">stereotype</span>.<span class="pl-s1">Component</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">Aspect</span>
+<span class="pl-c1">@</span><span class="pl-c1">Component</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyAspect</span> {
+
+     <span class="pl-c1">@</span><span class="pl-c1">AfterReturning</span>(<span class="pl-s1">value</span> =<span class="pl-s">"execution(* com.example.demo.service.*.*(..))"</span>,<span class="pl-s1">returning</span> = <span class="pl-s">"result"</span>)
+     <span class="pl-k">public</span> <span class="pl-smi">void</span> <span class="pl-en">afterReturningAdvice</span>(<span class="pl-smi">Object</span> <span class="pl-s1">result</span>){
+        <span class="pl-smi">System</span>.<span class="pl-s1">out</span>.<span class="pl-en">println</span>(<span class="pl-s">"After Returning Method, Return Value:"</span>+ <span class="pl-s1">result</span>);
+     }
+ }</pre></div>
+</li>
+</ul>
+<h3>@AfterThrowing</h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 方法抛出异常后执行。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 异常通知。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">aspectj</span>.<span class="pl-s1">lang</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">AfterThrowing</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">aspectj</span>.<span class="pl-s1">lang</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">Aspect</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">stereotype</span>.<span class="pl-s1">Component</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">Aspect</span>
+<span class="pl-c1">@</span><span class="pl-c1">Component</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyAspect</span> {
+      <span class="pl-c1">@</span><span class="pl-c1">AfterThrowing</span>(<span class="pl-s1">value</span> = <span class="pl-s">"execution(* com.example.demo.service.*.*(..))"</span>,<span class="pl-s1">throwing</span> = <span class="pl-s">"ex"</span>)
+      <span class="pl-k">public</span> <span class="pl-smi">void</span> <span class="pl-en">afterThrowingAdvice</span>(<span class="pl-smi">Exception</span> <span class="pl-s1">ex</span>){
+        <span class="pl-smi">System</span>.<span class="pl-s1">out</span>.<span class="pl-en">println</span>(<span class="pl-s">"After Throwing, Exception :"</span>+ <span class="pl-s1">ex</span>.<span class="pl-en">getMessage</span>());
+    }
+}</pre></div>
+</li>
+</ul>
+<h3><a class="user-mention notranslate" data-hovercard-type="organization" data-hovercard-url="/orgs/around/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/around">@around</a></h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 方法执行前后执行。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 环绕通知。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">aspectj</span>.<span class="pl-s1">lang</span>.<span class="pl-s1">ProceedingJoinPoint</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">aspectj</span>.<span class="pl-s1">lang</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">Around</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">aspectj</span>.<span class="pl-s1">lang</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">Aspect</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">stereotype</span>.<span class="pl-s1">Component</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">Aspect</span>
+<span class="pl-c1">@</span><span class="pl-c1">Component</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyAspect</span> {
+    <span class="pl-c1">@</span><span class="pl-c1">Around</span>(<span class="pl-s">"execution(* com.example.demo.service.*.*(..))"</span>)
+    <span class="pl-k">public</span> <span class="pl-smi">Object</span> <span class="pl-en">aroundAdvice</span>(<span class="pl-smi">ProceedingJoinPoint</span> <span class="pl-s1">joinPoint</span>) <span class="pl-k">throws</span> <span class="pl-smi">Throwable</span> {
+        <span class="pl-smi">System</span>.<span class="pl-s1">out</span>.<span class="pl-en">println</span>(<span class="pl-s">"Before Method"</span>);
+        <span class="pl-smi">Object</span> <span class="pl-s1">result</span> = <span class="pl-s1">joinPoint</span>.<span class="pl-en">proceed</span>();
+         <span class="pl-smi">System</span>.<span class="pl-s1">out</span>.<span class="pl-en">println</span>(<span class="pl-s">"After Method"</span>);
+         <span class="pl-k">return</span> <span class="pl-s1">result</span>;
+    }
+}</pre></div>
+</li>
+</ul>
+<h2>数据校验注解</h2>
+<h3><a class="user-mention notranslate" data-hovercard-type="user" data-hovercard-url="/users/Valid/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/Valid">@Valid</a></h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 开启数据校验。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 校验请求参数。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">PostMapping</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">RequestBody</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">web</span>.<span class="pl-s1">bind</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">RestController</span>;
+<span class="pl-k">import</span> <span class="pl-s1">javax</span>.<span class="pl-s1">validation</span>.<span class="pl-s1">Valid</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">RestController</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyController</span> {
+    <span class="pl-c1">@</span><span class="pl-c1">PostMapping</span>(<span class="pl-s">"/data"</span>)
+    <span class="pl-k">public</span> <span class="pl-smi">String</span> <span class="pl-en">createData</span>(<span class="pl-c1">@</span><span class="pl-c1">Valid</span> <span class="pl-c1">@</span><span class="pl-c1">RequestBody</span> <span class="pl-smi">MyData</span> <span class="pl-s1">data</span>) {
+        <span class="pl-k">return</span> <span class="pl-s">"Data is valid"</span>;
+    }
+}</pre></div>
+</li>
+</ul>
+<h3><a class="user-mention notranslate" data-hovercard-type="organization" data-hovercard-url="/orgs/NotNull/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/NotNull">@NotNull</a></h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 验证值不为空。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 必填字段。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"> <span class="pl-k">import</span> <span class="pl-s1">javax</span>.<span class="pl-s1">validation</span>.<span class="pl-s1">constraints</span>.<span class="pl-s1">NotNull</span>;
+
+ <span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyData</span>{
+     <span class="pl-c1">@</span><span class="pl-c1">NotNull</span>
+     <span class="pl-k">private</span> <span class="pl-smi">String</span> <span class="pl-s1">name</span>;
+ }</pre></div>
+</li>
+</ul>
+<h3><a class="user-mention notranslate" data-hovercard-type="user" data-hovercard-url="/users/notempty/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/notempty">@notempty</a></h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 验证字符串、集合、数组不为空。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 必填集合或字符串。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">javax</span>.<span class="pl-s1">validation</span>.<span class="pl-s1">constraints</span>.<span class="pl-s1">NotEmpty</span>;
+<span class="pl-k">import</span> <span class="pl-s1">java</span>.<span class="pl-s1">util</span>.<span class="pl-s1">List</span>;
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyData</span>{
+   <span class="pl-c1">@</span><span class="pl-c1">NotEmpty</span>
+   <span class="pl-k">private</span> <span class="pl-smi">String</span> <span class="pl-s1">name</span>;
+   <span class="pl-c1">@</span><span class="pl-c1">NotEmpty</span>
+   <span class="pl-k">private</span> <span class="pl-smi">List</span>&lt;<span class="pl-smi">String</span>&gt; <span class="pl-s1">items</span>;
+}</pre></div>
+</li>
+</ul>
+<h3><a class="user-mention notranslate" data-hovercard-type="user" data-hovercard-url="/users/notblank/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/notblank">@notblank</a></h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 验证字符串不为空且去空格后不为空。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 必填且非空的字符串。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">javax</span>.<span class="pl-s1">validation</span>.<span class="pl-s1">constraints</span>.<span class="pl-s1">NotBlank</span>;
+
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyData</span>{
+     <span class="pl-c1">@</span><span class="pl-c1">NotBlank</span>
+     <span class="pl-k">private</span> <span class="pl-smi">String</span> <span class="pl-s1">name</span>;
+ }</pre></div>
+</li>
+</ul>
+<h3><a class="user-mention notranslate" data-hovercard-type="user" data-hovercard-url="/users/min/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/min">@min</a></h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 验证数字最小值。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 验证最小值。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">javax</span>.<span class="pl-s1">validation</span>.<span class="pl-s1">constraints</span>.<span class="pl-s1">Min</span>;
+
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyData</span>{
+     <span class="pl-c1">@</span><span class="pl-c1">Min</span>(<span class="pl-c1">1</span>)
+     <span class="pl-k">private</span> <span class="pl-smi">int</span> <span class="pl-s1">age</span>;
+ }</pre></div>
+</li>
+</ul>
+<h3><a class="user-mention notranslate" data-hovercard-type="user" data-hovercard-url="/users/max/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/max">@max</a></h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 验证数字最大值。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 验证最大值。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">javax</span>.<span class="pl-s1">validation</span>.<span class="pl-s1">constraints</span>.<span class="pl-s1">Max</span>;
+
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyData</span>{
+     <span class="pl-c1">@</span><span class="pl-c1">Max</span>(<span class="pl-c1">100</span>)
+     <span class="pl-k">private</span> <span class="pl-smi">int</span> <span class="pl-s1">age</span>;
+ }</pre></div>
+</li>
+</ul>
+<h3>@Email</h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 验证邮箱格式。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 验证邮箱。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">javax</span>.<span class="pl-s1">validation</span>.<span class="pl-s1">constraints</span>.<span class="pl-s1">Email</span>;
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyData</span>{
+    <span class="pl-c1">@</span><span class="pl-c1">Email</span>
+    <span class="pl-k">private</span> <span class="pl-smi">String</span> <span class="pl-s1">email</span>;
+}</pre></div>
+</li>
+</ul>
+<h3><a class="user-mention notranslate" data-hovercard-type="user" data-hovercard-url="/users/pattern/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/pattern">@pattern</a></h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 验证字符串是否匹配正则表达式。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 复杂格式校验。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">javax</span>.<span class="pl-s1">validation</span>.<span class="pl-s1">constraints</span>.<span class="pl-s1">Pattern</span>;
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyData</span>{
+    <span class="pl-c1">@</span><span class="pl-c1">Pattern</span>(<span class="pl-s1">regexp</span> = <span class="pl-s">"^[a-zA-Z0-9]+$"</span>)
+    <span class="pl-k">private</span> <span class="pl-smi">String</span> <span class="pl-s1">username</span>;
+}</pre></div>
+</li>
+</ul>
+<h2>其他常用注解</h2>
+<h3>@EnableScheduling</h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 开启定时任务功能。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 启用定时任务。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">boot</span>.<span class="pl-s1">SpringApplication</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">boot</span>.<span class="pl-s1">autoconfigure</span>.<span class="pl-s1">SpringBootApplication</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">scheduling</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">EnableScheduling</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">SpringBootApplication</span>
+<span class="pl-c1">@</span><span class="pl-c1">EnableScheduling</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyApplication</span> {
+    <span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-smi">void</span> <span class="pl-en">main</span>(<span class="pl-smi">String</span>[] <span class="pl-s1">args</span>) {
+        <span class="pl-smi">SpringApplication</span>.<span class="pl-en">run</span>(<span class="pl-smi">MyApplication</span>.<span class="pl-k">class</span>, <span class="pl-s1">args</span>);
+    }
+}</pre></div>
+</li>
+</ul>
+<h3><a class="user-mention notranslate" data-hovercard-type="user" data-hovercard-url="/users/scheduled/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/scheduled">@scheduled</a></h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 定义定时任务。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 配置定时任务。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">scheduling</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">Scheduled</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">stereotype</span>.<span class="pl-s1">Component</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">Component</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyTask</span> {
+    <span class="pl-c1">@</span><span class="pl-c1">Scheduled</span>(<span class="pl-s1">fixedRate</span> = <span class="pl-c1">5000</span>)
+    <span class="pl-k">public</span> <span class="pl-smi">void</span> <span class="pl-en">myTask</span>() {
+        <span class="pl-smi">System</span>.<span class="pl-s1">out</span>.<span class="pl-en">println</span>(<span class="pl-s">"Running Task"</span>);
+    }
+}</pre></div>
+</li>
+</ul>
+<h3><a class="user-mention notranslate" data-hovercard-type="user" data-hovercard-url="/users/transactional/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/transactional">@transactional</a></h3>
+<ul>
+<li>
+<p><strong>作用：</strong> 开启事务管理。</p>
+</li>
+<li>
+<p><strong>使用场景：</strong> 数据库事务。</p>
+</li>
+<li>
+<p><strong>示例代码：</strong></p>
+<div class="highlight highlight-source-java"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">stereotype</span>.<span class="pl-s1">Service</span>;
+<span class="pl-k">import</span> <span class="pl-s1">org</span>.<span class="pl-s1">springframework</span>.<span class="pl-s1">transaction</span>.<span class="pl-s1">annotation</span>.<span class="pl-s1">Transactional</span>;
+
+<span class="pl-c1">@</span><span class="pl-c1">Service</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-smi">MyService</span> {
+    <span class="pl-c1">@</span><span class="pl-c1">Transactional</span>
+    <span class="pl-k">public</span> <span class="pl-smi">void</span> <span class="pl-en">myTransaction</span>(){
+        <span class="pl-c">//... database operation</span>
+    }
+}</pre></div>
+</li>
+</ul></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://buhuijiaojiao.github.io">不会教教的博客</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","buhuijiaojiao/buhuijiaojiao.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
+
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
+
+</script>
+
+
+</html>
